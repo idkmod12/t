@@ -65,6 +65,15 @@ if LocalPLR.Name ~= Username then
         Time = 6
     })
 
+    local latestVersion = request({ Url = "https://raw.githubusercontent.com/sixpennyfox4/rbx/refs/heads/main/ControlBotZ%20Version", Method = "GET" }).Body:match("^%s*(.-)%s*$")
+    if latestVersion ~= "1.1.3" then
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "Old Version!",
+            Text = "Looks like you are using old version. Get the newest one from the discord server!",
+            Time = 8
+        })
+    end
+
     function showDefaultGui(enabled, text)
 
         if enabled == true then
@@ -384,7 +393,7 @@ if LocalPLR.Name ~= Username then
         end
 
         -- RESET:
-        if msg:sub(1, 6) == Prefix .. "oof" then
+        if msg:sub(1, 6) == Prefix .. "reset" then
 
             function runCode()
                 LocalPLR.Character.Humanoid.Health = 0
@@ -405,8 +414,8 @@ if LocalPLR.Name ~= Username then
 
         end
 
-        -- B:
-        if msg:sub(1, 6) == Prefix .. "B" then
+        -- BRING:
+        if msg:sub(1, 6) == Prefix .. "bring" then
 
             function runCode()
                 LocalPLR.Character:FindFirstChild("HumanoidRootPart").CFrame = game.Players[player.Name].Character:FindFirstChild("HumanoidRootPart").CFrame
@@ -477,7 +486,7 @@ if LocalPLR.Name ~= Username then
         end
 
         -- CHAT:
-        if msg:sub(1, 5) == Prefix .. "say" then
+        if msg:sub(1, 5) == Prefix .. "chat" then
 
             if player.Name ~= Username and not isAdmin(player.Name) then
                 return
@@ -524,7 +533,7 @@ if LocalPLR.Name ~= Username then
         end
 
         -- LINEUP:
-        if msg:sub(1, 7) == Prefix .. "line" then
+        if msg:sub(1, 7) == Prefix .. "lineup" then
 
             local direction = msg:sub(9)
             local spacing = 3
@@ -552,7 +561,7 @@ if LocalPLR.Name ~= Username then
         end
 
         -- SHUTDOWN:
-        if msg:sub(1, 9) == Prefix .. "crash" then
+        if msg:sub(1, 9) == Prefix .. "shutdown" then
 
             if player.Name ~= Username and not isAdmin(player.Name) then
                 return
@@ -699,8 +708,8 @@ if LocalPLR.Name ~= Username then
             specifyBots(msg:sub(6), runCode)
         end
 
-        -- ORBIT:
-        if msg:sub(1, 6) == Prefix .. "orbit" then
+        -- O1:
+        if msg:sub(1, 6) == Prefix .. "O1" then
 
             local args = getArgs(message:sub(8))
             local targetPLR = getFullPlayerName(args[1])
@@ -2157,10 +2166,10 @@ if LocalPLR.Name ~= Username then
 
             if index == 1 then
                 if page == "1" then
-                    chat("rejoin, jump, oof, sit, say (message), shutdown, orbit (username) (speed)/unorbit, bang (username) (speed)/unbang, walkto (username), speed (number), B, clearchat, privacymode (enable/disable)")
+                    chat("rejoin, jump, reset, sit, chat (message), shutdown, O1 (username) (speed)/unorbit, bang (username) (speed)/unbang, walkto (username), speed (number), bring, clearchat, privacymode (enable/disable)")
 
                     wait(0.2)
-                    chat("spin (number)/unspin, line (direction), 3drender (enable/disable), dance (emote), fling (username)/unfling, follow (username)/unfollow, lookat (username)/unlookat, stack (username)/unstack, quit")
+                    chat("spin (number)/unspin, lineup (direction), 3drender (enable/disable), dance (emote), fling (username)/unfling, follow (username)/unfollow, lookat (username)/unlookat, stack (username)/unstack, quit")
 
                     wait(0.2)
                     chat("goto (username), carpet (username)/uncarpet, linefollow (username)/unlinefollow, riz (username), facebang (username) (speed)/unfbang, announce (message), rocket (height), antibang, 2orbit (username)")
